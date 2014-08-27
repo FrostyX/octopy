@@ -1,19 +1,29 @@
-from PySide.QtGui import QListWidget, QGridLayout
 from . import View
+from PySide.QtGui import QListWidget,\
+	QHBoxLayout,\
+	QLabel
 
 
 class HomeView(View):
 
 	def display(self):
-		grid = QGridLayout()
-		grid.setSpacing(10)
+		layout = QHBoxLayout()
+		layout.setSpacing(10)
 
+		# Left panel - repositories
 		qlistWidget = QListWidget()
-
 		for repo in self.args.user.repositories():
 			qlistWidget.addItem(repo.name)
+		layout.addWidget (qlistWidget)
 
-		grid.addWidget(qlistWidget)
 
-		self.setLayout(grid)
+		# Middle panel - commits
+		commitsLabel = QLabel("There will be the commits")
+		layout.addWidget (commitsLabel)
+
+		# Something
+		somethingLabel = QLabel("There will be something")
+		layout.addWidget (somethingLabel)
+
+		self.setLayout(layout)
 		self.show()
